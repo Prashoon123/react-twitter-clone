@@ -1,0 +1,28 @@
+.login {
+  display: grid;
+  place-items: center;
+  background-color: var(--twitter-dim-background);
+  flex: 1;
+}
+
+.login > button {
+  width: 300px;
+  background-color: var(--twitter-orange-color);
+  color: white;
+  font-weight: 800;
+}
+
+.login > button:hover {
+  background-color: #fe5119;
+  transition: 100ms ease-out;
+}
+
+.login > div > img {
+  object-fit: contain;
+  height: 300px;
+}
+
+.login > div {
+  display: flex;
+  flex-direction: column;
+}

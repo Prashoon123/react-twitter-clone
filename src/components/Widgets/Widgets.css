@@ -1,0 +1,67 @@
+.widgets {
+  flex: 0.3;
+}
+
+.widgets__search {
+  display: flex;
+  align-items: center;
+  background-color: #253341;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.widgets__searchIcon {
+  color: #8899A6;
+}
+
+.widgets__search > input {
+  color: white;
+  padding-left: 10px;
+  border: none;
+  background-color: #253341;
+  outline-width: 0;
+  caret-color: white;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #8899A6;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #8899A6;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #8899A6;
+}
+
+.widgets__widgetContainer {
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: #192734;
+    height: 500px;
+    border-radius: 20px;
+}
+
+.widgets__h2 {
+    padding: 10px;
+    border-bottom: 1px solid var(--twitter-border-color);
+}
+
+.widgets__tweetEmbed {
+    padding-top: 25px;
+}
+
+.widgets__tweetShare {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.widgets__folllowButton {
+    padding-top: 10px;
+    text-align: center;
+}
