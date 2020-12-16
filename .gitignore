@@ -21,4 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.eslintcache
+.firebase/hosting.YnVpbGQ.cache
+.firebaserc
+firebase.json
