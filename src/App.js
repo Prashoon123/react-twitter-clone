@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +10,7 @@ import Feed from "./components/Feed/Feed";
 import Login from "./components/Login/Login";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Widgets from "./components/Widgets/Widgets";
-import { auth } from "./firebase";
+import db, { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SinglePost from "./components/SinglePost/SinglePost";
 
@@ -18,7 +18,20 @@ function App() {
   const [user] = useAuthState(auth);
   const input = useRef(null);
 
-  console.log(user);
+  useEffect(() => {
+    if (user) {
+      db.collection("users")
+        .doc(user.uid)
+        .set(
+          {
+            email: user.email || user.providerData[0].email,
+            uid: user.uid,
+            photoURL: user.photoURL,
+          },
+          { merge: true }
+        );
+    }
+  }, [user]);
 
   if (!user) {
     return (

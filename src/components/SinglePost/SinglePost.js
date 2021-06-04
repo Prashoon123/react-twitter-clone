@@ -10,8 +10,6 @@ function SinglePost() {
   const history = useHistory();
   const [post, loading] = useDocument(db.doc(`posts/${id}`));
 
-  console.log(post);
-
   return (
     <>
       <div className="singlePost">
