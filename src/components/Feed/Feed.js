@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
 import "./Feed.css";
 import Post from "./Post/Post";
 import TweetBox from "./TweetBox/TweetBox";
 import db from "../../firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
 
-function Feed() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    db.collection("posts")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setPosts(snapshot.docs.map((doc) => doc.data()))
-      );
-  }, []);
+function Feed({ input }) {
+  const [posts] = useCollection(
+    db.collection("posts").orderBy("timestamp", "desc")
+  );
 
   return (
     <div className="feed">
@@ -22,19 +16,23 @@ function Feed() {
         <h2>Latest Tweets</h2>
       </div>
 
-      <TweetBox />
+      <TweetBox input={input} />
 
-        {posts.map((post) => (
-          <Post
-            timestamp={post.timestamp}
-            displayName={post.displayName}
-            username={post.username}
-            verified={post.verified}
-            text={post.text}
-            avatar={post.avatar}
-            image={post.image}
-          />
-        ))}
+      {posts?.docs.map((post) => (
+        <Post
+          key={post.id}
+          id={post.id}
+          timestamp={post.data().timestamp}
+          displayName={post.data().displayName}
+          username={post.data().username}
+          verified={post.data().verified}
+          text={post.data().text}
+          avatar={post.data().avatar}
+          image={post.data().image}
+          uid={post.data().uid}
+          likes={post.data().likes}
+        />
+      ))}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,74 +10,47 @@ import Feed from "./components/Feed/Feed";
 import Login from "./components/Login/Login";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Widgets from "./components/Widgets/Widgets";
-import { useStateValue } from "./StateProvider";
+import { auth } from "./firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import SinglePost from "./components/SinglePost/SinglePost";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [user] = useAuthState(auth);
+  const input = useRef(null);
+
+  console.log(user);
+
+  if (!user) {
+    return (
+      <>
+        <Router>
+          <Switch>
+            <Route path="/">
+              <Login />
+            </Route>
+          </Switch>
+        </Router>
+      </>
+    );
+  }
+
   return (
     // BEM naming convention
     <div className="app">
-      {!user ? (
-        <>
-          <Router>
-            <Redirect exact from="/" to="/login" />
-            <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-            </Switch>
-          </Router>
-        </>
-      ) : (
-        <>
-          <Router>
-            <Redirect exact from="/" to="/home" />
-            <Switch>
-              {/* <Route path="/explore">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* <Route path="/notifications">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* <Route path="/messages">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* <Route path="/bookmarks">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* <Route path="/lists">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* <Route path="/profile">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* <Route path="/more">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route> */}
-              {/* This is the default route, */}
-              <Route path="/home">
-                <Sidebar />
-                <Feed />
-                <Widgets />
-              </Route>
-            </Switch>
-          </Router>
-        </>
-      )}
+      <>
+        <Router>
+          <Switch>
+            <Route path="/tweet/:id">
+              <SinglePost />
+            </Route>
+            <Route path="/">
+              <Sidebar input={input} />
+              <Feed input={input} />
+              <Widgets />
+            </Route>
+          </Switch>
+        </Router>
+      </>
     </div>
   );
 }

@@ -11,56 +11,69 @@
 
 .tweetBox__input {
   padding: 20px;
+  margin-top: -10px;
   display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-.inputTextContainer {
-  border-right: 1px solid var(--twitter-border-color);
+.tweetBox__inputs {
+  display: flex;
+  width: 100%;
+}
+
+.tweetBox__previewImgContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
 }
 
 .tweetBox__inputText {
   margin-left: 20px;
+  margin-right: 30px;
   font-size: 20px;
   border: none;
   outline-width: 0;
   background-color: var(--twitter-dim-background);
   caret-color: white;
   color: #f9fafa;
-  padding-top: 7px;
+  width: 90%;
 }
 
-.tweetBox__inputImage {
-  margin-left: 20px;
-  font-size: 20px;
-  border: none;
-  outline-width: 0;
-  background-color: var(--twitter-dim-background);
-  caret-color: white;
-  color: #f9fafa;
-  padding-top: 7px;
+.tweetBox__previewImg {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.tweetBox__remove {
+  cursor: pointer;
+  color: #ef4444;
 }
 
 .tweetBox__btn {
   background-color: #dc541f !important;
   text-transform: inherit !important;
-  height: 50px;
+  height: 38px;
   border-radius: 30px !important;
   color: #fefbfa !important;
   font-weight: 900 !important;
   border: none !important;
-  width: 100px !important;
+  width: 80px !important;
   align-self: flex-end;
 }
 
 .tweetBox__btn--disabled {
-  background-color: #853E27 !important;
+  background-color: #853e27 !important;
   text-transform: inherit !important;
-  height: 50px;
+  height: 38px;
   border-radius: 30px !important;
-  color: #8A8F95 !important;
+  color: #8a8f95 !important;
   font-weight: 900 !important;
   border: none !important;
-  width: 100px !important;
+  width: 80px !important;
   align-self: flex-end;
 }
 
@@ -68,8 +81,7 @@
   cursor: pointer;
   color: #dc541f;
   display: flex;
-  width: 200px;
-  margin-left: 80px;
+  width: 60px;
   justify-content: space-between;
 }
 
@@ -77,4 +89,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px solid var(--twitter-border-color);
+  margin-left: 80px;
+  padding-top: 8px;
+}
+
+.tweetBox__hidden {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .tweetBox__options {
+    width: 200px;
+  }
+  .tweetBox__hidden {
+    display: inline-flex !important;
+  }
+}
+
+.picker {
+  position: absolute;
+  z-index: 100;
+  margin-top: -20px;
 }

@@ -1,17 +1,25 @@
 import "./Widgets.css";
 import {
-  TwitterTimelineEmbed,
   TwitterShareButton,
   TwitterTweetEmbed,
   TwitterFollowButton,
 } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
+import { useEffect, useState } from "react";
 
 function Widgets() {
+  const [showTweet, setShowTweet] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowTweet(true);
+    }, 2000);
+  }, []);
+
   return (
     <div className="widgets">
       <div className="widgets__search">
-        <SearchIcon className="widgets__searchIcon" />
+        <SearchIcon />
         <input placeholder="Search Twitter" type="text" />
       </div>
       <div className="widgets__widgetContainer">
@@ -28,8 +36,7 @@ function Widgets() {
           <TwitterShareButton
             url={"https://twitter-clone-abc.web.app/"}
             options={{
-              text:
-                "This #Twitter Clone is amazing, just looks like the real Twitter website!!",
+              text: "This #Twitter Clone is amazing, just looks like the real Twitter website!!",
               via: "PrashoonB",
             }}
           />

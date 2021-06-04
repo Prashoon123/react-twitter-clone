@@ -1,32 +1,81 @@
 import "./Login.css";
 import login__logo from "./logo-with-text.png";
-import { Button } from "@material-ui/core";
-import { auth, provider } from "../../firebase";
-import { actionTypes } from "../../reducer";
-import { useStateValue } from "../../StateProvider";
+import db, { auth, provider, twitterProvider } from "../../firebase";
+import { useHistory } from "react-router";
+import {
+  TwitterLoginButton,
+  GoogleLoginButton,
+} from "react-social-login-buttons";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { FadingCircle } from "better-react-spinkit";
 
 function Login() {
-  const [state, dispatch] = useStateValue();
+  const history = useHistory();
+  const [user, loading] = useAuthState(auth);
+
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
+  //     if (authUser) {
+  //       history.push("/");
+  //     }
+  //   });
+
+  //   return unsubscribe;
+  // }, []);
+
   const signIn = () => {
     // sign in...
     auth
       .signInWithPopup(provider)
-      .then((result) => {
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
-        });
+      .then((authUser) => {
+        db.collection("users").doc(authUser.user.uid).set(
+          {
+            email: authUser.user.email,
+            uid: authUser.user.uid,
+            photoURL: authUser.user.photoURL,
+          },
+          { merge: true }
+        );
+        history.push("/");
       })
       .catch((error) => alert(error.message));
   };
+
+  const signInWithTwitter = () => {
+    auth
+      .signInWithPopup(twitterProvider)
+      .then((authUser) => {
+        db.collection("users")
+          .doc(authUser.user.uid)
+          .set(
+            {
+              email: authUser.user.email || authUser.user.providerData[0].email,
+              uid: authUser.user.uid,
+              photoURL: authUser.user.photoURL,
+            },
+            { merge: true }
+          );
+        history.push("/");
+      })
+      .catch((error) => alert(error.message));
+  };
+
   return (
     <div className="login">
-      <div className="login__logo">
-        <img src={login__logo} alt="" />
-      </div>
-      <Button type="submit" onClick={signIn}>
-        Sign In
-      </Button>
+      <img src={login__logo} alt="twitterLogo" className="login__logo" />
+      {loading ? (
+        <>
+          <h2>Logging you in...</h2>
+          <div className="space" />
+          <FadingCircle size={80} color="white" />
+        </>
+      ) : (
+        <div className="login__loginButtons">
+          <TwitterLoginButton onClick={signInWithTwitter} />
+          <div className="space" />
+          <GoogleLoginButton onClick={signIn} />
+        </div>
+      )}
     </div>
   );
 }

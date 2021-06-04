@@ -1,28 +1,24 @@
 .login {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: var(--twitter-dim-background);
   flex: 1;
+  height: 100vh;
 }
 
-.login > button {
-  width: 300px;
-  background-color: var(--twitter-orange-color);
-  color: white;
-  font-weight: 800;
-}
-
-.login > button:hover {
-  background-color: #fe5119;
-  transition: 100ms ease-out;
-}
-
-.login > div > img {
+.login__logo {
   object-fit: contain;
   height: 300px;
 }
 
-.login > div {
-  display: flex;
-  flex-direction: column;
+.login__loginButtons {
+  width: 50%;
+}
+
+@media (min-width: 800px) {
+  .login__loginButtons {
+    width: 30%;
+  }
 }

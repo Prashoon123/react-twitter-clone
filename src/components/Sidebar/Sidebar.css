@@ -1,9 +1,24 @@
 .sidebar {
   border-right: 1px solid var(--twitter-border-color);
-  flex: 0.15;
-  min-width: 250px;
-  padding-left: 20px;
-  padding-right: 20px;
+  flex: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    border-right: 1px solid var(--twitter-border-color);
+    flex: 0.15;
+    min-width: 250px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .sidebar__userMore {
+    display: flex !important;
+    flex-direction: column;
+  }
 }
 
 .sidebar__icon {
@@ -24,16 +39,77 @@
 .sidebar__tweetButton {
   background-color: #dc541f !important;
   text-transform: inherit !important;
+  height: 40px !important;
+  width: 40px !important;
+  margin-left: 5px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px !important;
+  color: #f9e3da !important;
+  font-weight: 900 !important;
+  border: none !important;
+  cursor: pointer;
+}
+
+.sidebar__tweetButtonBig {
+  background-color: #dc541f !important;
+  text-transform: inherit !important;
   height: 50px;
-  border-radius: 30px !important;
+  border-radius: 999px !important;
   color: #f9e3da !important;
   font-weight: 900 !important;
   border: none !important;
   margin-top: 20px !important;
   width: 250px !important;
+  display: none !important;
+}
+
+.sidebar__tweetButtonBig:hover {
+  background-color: #fe5119 !important;
+  transition: 100ms ease-out;
+}
+
+@media (min-width: 1024px) {
+  .sidebar__tweetButtonBig {
+    display: inline-flex !important;
+  }
+  .sidebar__tweetButton {
+    display: none !important;
+  }
+
+  .sidebar__user {
+    margin-left: -15px;
+  }
 }
 
 .sidebar__tweetButton:hover {
   background-color: #fe5119 !important;
   transition: 100ms ease-out;
+}
+
+.sidebar__user {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.sidebar__user > img {
+  border-radius: 999px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.sidebar__user > img:hover {
+  opacity: 0.8;
+}
+
+.sidebar__userMore {
+  display: none;
+}
+
+.sidebar__username {
+  color: #8899a6;
 }

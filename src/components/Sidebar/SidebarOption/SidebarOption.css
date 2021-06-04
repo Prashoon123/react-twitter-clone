@@ -1,26 +1,36 @@
 .sidebarOption {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .sidebarOption:hover {
-    color: var(--twitter-orange-color);
-    transition: color 100ms ease-out;
-    border-radius: 30px;
+  color: var(--twitter-orange-color);
+  transition: color 100ms ease-out;
+  border-radius: 30px;
 }
 
 .sidebarOption--active {
-    color: var(--twitter-orange-color);
+  color: var(--twitter-orange-color);
 }
 
 .sidebarOption > .MuiSvgIcon-root {
-    padding: 12px;
-    font-size: 30px; 
+  padding: 12px;
+  font-size: 28px;
 }
 
 .sidebarOption > h2 {
+  font-weight: 800;
+  font-size: 20px;
+  margin-left: 10px;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sidebarOption > h2 {
     font-weight: 800;
     font-size: 20px;
     margin-left: 10px;
+    display: inline-flex;
+  }
 }
