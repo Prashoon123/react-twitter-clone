@@ -54,11 +54,13 @@
   object-fit: contain;
   border-radius: 20px;
   height: 200px;
+  width: 200px;
 }
 
 @media (min-width: 768px) {
   .post__body > img {
     height: 350px;
+    width: 350px;
   }
 }
 
