@@ -9,7 +9,7 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { Button } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
@@ -83,7 +83,7 @@ function Sidebar({ input }) {
       </Button>
 
       <div className="sidebar__user">
-        <img
+        <Avatar
           onClick={() => auth.signOut()}
           src={user?.photoURL}
           height="40"
